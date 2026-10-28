@@ -1,0 +1,13 @@
+{
+  "name": "Deniz Eymen'e Destek",
+  "short_name": "Deniz Eymen",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eaf3ff",
+  "theme_color": "#0b4f9c",
+  "icons": [
+    { "src": "/ikon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/ikon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/ikon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

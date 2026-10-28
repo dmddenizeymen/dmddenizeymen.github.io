@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deniz Eymen'e Destek</title>
+<meta name="description" content="DMD savaşçısı Deniz Eymen için tek dokunuşla destek ol: canlı yayına katıl, SMS ile bağış yap, paylaş.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DMD Savaşçısı Deniz Eymen">
+<meta property="og:title" content="Deniz Eymen'e Destek 💙">
+<meta property="og:description" content="Valilik onaylı kampanya. Tek dokunuşla SMS bağışı, IBAN kopyalama, canlı yayın.">
+<meta property="og:image" content="https://dmddenizeymen.github.io/paylas-deniz-eymen-gh.jpg">
+<meta property="og:image:secure_url" content="https://dmddenizeymen.github.io/paylas-deniz-eymen-gh.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DMD Savaşçısı Deniz Eymen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#0b4f9c">
+<link rel="icon" type="image/png" sizes="192x192" href="/ikon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Deniz Eymen">
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root {
+    --mavi: #0b4f9c;
+    --mavi-koyu: #08376d;
+    --acik: #eaf3ff;
+    --yesil: #128c4a;
+    --kirmizi: #c62828;
+    --turuncu: #e8590c;
+    --yazi: #10233d;
+    --gri: #4a5a70;
+  }
+  * { box-sizing: border-box; }
+  html { background: #eaf3ff; color-scheme: only light; }
+  body {
+    margin: 0;
+    background: var(--acik);
+    color: var(--yazi);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  main { max-width: 520px; margin: 0 auto; padding: 16px 16px 40px; }
+
+  header { text-align: center; padding: 8px 0 16px; }
+  .foto {
+    display: block; margin: 0 auto;
+    width: 200px; height: 200px; border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 16px rgba(11,79,156,.25);
+  }
+  h1 { font-size: 32px; margin: 8px 0 4px; color: var(--mavi-koyu); }
+  .alt { margin: 0; color: var(--gri); font-size: 19px; }
+  .kur {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+    min-height: 52px; padding: 10px 20px;
+    font: inherit; font-size: 19px; font-weight: 800;
+    color: var(--mavi); background: #fff; border: 3px solid var(--mavi); border-radius: 999px; cursor: pointer;
+  }
+  .kur:focus-visible { outline: 4px solid #ffb300; outline-offset: 3px; }
+  .kur-kutu { background: #fff; border-radius: 20px; padding: 20px; font-size: 20px; }
+  .kur-kutu h2 { font-size: 23px; margin: 0 0 14px; color: var(--mavi-koyu); }
+  .kur-kutu ol { margin: 0; padding-inline-start: 26px; }
+  .kur-kutu li { margin-bottom: 12px; }
+  .kur-kutu b { color: var(--mavi-koyu); }
+
+  .ilerleme { background: #fff; border-radius: 18px; padding: 16px; margin: 8px 0 20px; }
+  .ilerleme-yazi { display: flex; justify-content: space-between; font-weight: 700; font-size: 19px; }
+  .cubuk { height: 22px; background: #d6e4f5; border-radius: 999px; overflow: hidden; margin-top: 8px; }
+  .cubuk span { display: block; height: 100%; width: 0; background: var(--yesil); border-radius: 999px; transition: width 1s; }
+
+  .buton {
+    display: flex; align-items: center; gap: 16px;
+    width: 100%; min-height: 84px;
+    margin: 0 0 16px; padding: 14px 20px;
+    border: 0; border-radius: 20px;
+    color: #fff; text-decoration: none; text-align: left;
+    font: inherit; font-size: 24px; font-weight: 800;
+    box-shadow: 0 4px 0 rgba(0,0,0,.18);
+    cursor: pointer;
+  }
+  .buton:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,.18); }
+  .buton:focus-visible { outline: 4px solid #ffb300; outline-offset: 3px; }
+  .ikon { font-size: 40px; line-height: 1; flex: none; }
+  .buton small { display: block; font-size: 17px; font-weight: 500; opacity: .95; margin-top: 2px; }
+  .b-canli { background: var(--kirmizi); }
+  .b-sms { background: var(--yesil); }
+  .b-video { background: var(--turuncu); }
+  .b-paylas { background: #1f8f3a; }
+  .b-paylas.wa { background: #25a244; }
+
+  .yayin-kutu { background: #fff; border-radius: 20px; padding: 16px; margin-bottom: 16px; }
+  .yayin-kutu .buton { margin-bottom: 10px; }
+  .yayin-saat { font-size: 21px; font-weight: 700; text-align: center; margin: 4px 0 10px; }
+  .yayin-kalan { display: block; font-size: 18px; font-weight: 500; color: var(--gri); }
+  .canli-simdi { color: var(--kirmizi); animation: nabiz 1.2s infinite; }
+  @keyframes nabiz { 50% { opacity: .45; } }
+  .takvim {
+    display: block; text-align: center; font-size: 19px; font-weight: 700;
+    color: var(--mavi); padding: 10px; border: 3px solid var(--mavi);
+    border-radius: 14px; text-decoration: none;
+  }
+  .not { font-size: 16px; color: var(--gri); margin: -8px 4px 18px; }
+
+  .diger { text-align: center; margin-top: 8px; }
+  .diger a { color: var(--mavi); font-weight: 700; font-size: 19px; }
+  .resmi { font-size: 15px; color: var(--gri); text-align: center; margin-top: 16px; }
+
+  .bagislar { margin-top: 28px; scroll-margin-top: 12px; }
+  .bagislar h2 {
+    font-size: 26px; margin: 0 0 4px; color: var(--mavi-koyu); text-align: center;
+  }
+  .bagislar-alt { text-align: center; color: var(--gri); font-size: 17px; margin: 0 0 16px; }
+  .bagislar h3 {
+    font-size: 21px; margin: 22px 0 10px; color: var(--mavi-koyu);
+    border-bottom: 3px solid #cfe0f5; padding-bottom: 6px;
+  }
+  #bagis-bolumler { display: flex; flex-direction: column; }
+  .hesap { background: #fff; border-radius: 20px; padding: 16px; margin-bottom: 14px; }
+  .hesap-ust { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .para { font-size: 22px; font-weight: 800; }
+  .banka { font-size: 16px; color: var(--gri); }
+  .iban {
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    font-size: 21px; font-weight: 700; letter-spacing: .5px;
+    margin: 10px 0 12px; word-break: break-word; direction: ltr; text-align: left;
+  }
+  .kopyala {
+    width: 100%; min-height: 58px;
+    font: inherit; font-size: 20px; font-weight: 800;
+    border: 3px solid var(--mavi); border-radius: 14px;
+    background: #fff; color: var(--mavi); cursor: pointer;
+  }
+  .kopyala:focus-visible, .kucuk-kopyala:focus-visible { outline: 4px solid #ffb300; outline-offset: 3px; }
+  .kopyala.tamam, .kucuk-kopyala.tamam { background: var(--yesil); border-color: var(--yesil); color: #fff; }
+  .satir { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; font-size: 17px; }
+  .satir + .satir, .iban + .kopyala + .satir { border-top: 1px solid #e3ebf5; }
+  .satir b { font-size: 19px; }
+  .kucuk-kopyala {
+    flex: none; font: inherit; font-size: 16px; font-weight: 700;
+    padding: 8px 12px; border-radius: 10px; border: 2px solid var(--mavi);
+    background: #fff; color: var(--mavi); cursor: pointer;
+  }
+  .b-kart { background: #6b3fa0; }
+  .b-paypal { background: #003087; }
+  .b-gofundme { background: #00873e; }
+  .b-whatsapp { background: #25a244; }
+  .b-ara { background: var(--mavi); }
+  .alt-bolum { margin-top: 28px; }
+  .alt-bolum h2 { font-size: 24px; margin: 0 0 12px; color: var(--mavi-koyu); text-align: center; }
+  .sosyal { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sosyal a {
+    display: block; text-align: center; padding: 16px 8px;
+    background: #fff; border-radius: 14px; color: var(--mavi);
+    font-weight: 700; font-size: 19px; text-decoration: none;
+  }
+
+  .izin {
+    background: #fff; border: 4px solid var(--yesil); border-radius: 20px;
+    padding: 16px; margin: 0 0 16px; text-align: center;
+  }
+  .izin-ust { font-size: 23px; font-weight: 800; color: var(--yesil); }
+  .izin-no { font-size: 21px; margin: 6px 0; }
+  .izin-no b { font-size: 24px; letter-spacing: .5px; }
+  .izin-alt { font-size: 17px; color: var(--gri); margin-bottom: 12px; }
+  .izin-buton {
+    width: 100%; min-height: 60px; font: inherit; font-size: 20px; font-weight: 800;
+    color: #fff; background: var(--yesil); border: 0; border-radius: 14px; cursor: pointer;
+  }
+  .izin-buton:focus-visible { outline: 4px solid #ffb300; outline-offset: 3px; }
+
+  .belge-perde {
+    position: fixed; inset: 0; z-index: 10; overflow-y: auto;
+    background: rgba(8, 25, 50, .92); padding: 16px;
+  }
+  .belge-ic { max-width: 720px; margin: 0 auto; }
+  .belge-kapat {
+    position: sticky; top: 0; z-index: 1; width: 100%; min-height: 64px; margin-bottom: 16px;
+    font: inherit; font-size: 22px; font-weight: 800;
+    background: #fff; color: var(--yazi); border: 0; border-radius: 14px; cursor: pointer;
+  }
+  .belge { background: #fff; border-radius: 14px; padding: 12px; margin-bottom: 16px; }
+  .belge h2 { font-size: 20px; margin: 0 0 10px; }
+  .belge img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .belge a { display: block; text-align: center; font-weight: 700; font-size: 20px; color: var(--mavi); padding: 12px; }
+
+  .diller { display: flex; justify-content: center; gap: 8px; margin: 0 0 8px; flex-wrap: wrap; }
+  .diller button {
+    font: inherit; font-size: 17px; padding: 8px 14px;
+    border-radius: 12px; border: 2px solid var(--mavi);
+    background: #fff; color: var(--mavi); cursor: pointer;
+  }
+  .diller button[aria-pressed="true"] { background: var(--mavi); color: #fff; }
+
+  [dir="rtl"] .buton { text-align: right; }
+  .gizli { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <nav class="diller" aria-label="Dil / Language">
+    <button type="button" data-dil="tr">Türkçe</button>
+    <button type="button" data-dil="en">English</button>
+    <button type="button" data-dil="de">Deutsch</button>
+    <button type="button" data-dil="fr">Français</button>
+    <button type="button" data-dil="ar">العربية</button>
+  </nav>
+
+  <header>
+    <img class="foto" src="foto.jpg" alt="Deniz Eymen" onerror="this.remove()">
+    <h1>Deniz Eymen</h1>
+    <p class="alt" data-t="alt">3 yaşında, Elevidys gen tedavisi için desteğinizi bekliyor 💙</p>
+    <button class="kur gizli" id="b-kur" type="button" data-t="kur">📲 Telefonuma ekle</button>
+  </header>
+
+  <section class="izin">
+    <div class="izin-ust" data-t="izin_baslik">✅ VALİLİK ONAYLI KAMPANYA</div>
+    <div class="izin-no"><span data-t="izin_no">Faaliyet No:</span> <b>35.2026.4179</b></div>
+    <div class="izin-alt" data-t="izin_alt">İzmir Valiliği izinli · Türkiye geneli · Geçerlilik: 21.01.2026 – 20.01.2027. Bağışlar sadece Deniz Eymen Çopur adına açılmış resmi hesaplara gider.</div>
+    <button class="izin-buton" id="b-belgeler" type="button" data-t="belgeler">📄 İzin belgelerini görüntüle</button>
+  </section>
+
+  <section class="ilerleme" aria-live="polite">
+    <div class="ilerleme-yazi">
+      <span data-t="hedef">Hedef: 2,9 milyon $</span>
+      <span id="yuzde-yazi">%21</span>
+    </div>
+    <div class="cubuk"><span id="cubuk" style="width:21%"></span></div>
+  </section>
+
+  <a class="buton b-sms" id="b-sms" href="sms:9097?&amp;body=DEN%C4%B0Z">
+    <span class="ikon">📩</span>
+    <span><span data-t="sms">SMS ile bağış yap</span><small data-t="sms_alt">Tek dokunuş · 1 SMS = 100 TL</small></span>
+  </a>
+  <p class="not" id="sms-not" data-t="sms_not">Mesaj hazır açılır, sadece “Gönder”e basın. (Türkiye'deki tüm hatlar)</p>
+
+  <section class="bagislar" id="bagislar">
+    <h2 data-t="bagislar">💙 Bağışlar</h2>
+    <p class="bagislar-alt" data-t="bagislar_alt">Valilik onaylı resmi hesaplar · Dokunun, kopyalansın</p>
+
+    <div id="bagis-bolumler">
+      <div id="bolum-tr">
+        <h3 data-t="turkiye">🇹🇷 Türkiye'den</h3>
+        <div class="hesap">
+          <div class="hesap-ust"><span class="para">₺ TL</span><span class="banka">DenizBank</span></div>
+          <div class="iban">TR27 0013 4000 0257 4395 0000 04</div>
+          <button class="kopyala" type="button" data-kopya="TR270013400002574395000004" data-t="kopyala">📋 IBAN'ı kopyala</button>
+          <div class="satir">
+            <span><span data-t="alici">Alıcı adı:</span><br><b>DENİZ EYMEN ÇOPUR</b></span>
+            <button class="kucuk-kopyala" type="button" data-kopya="DENİZ EYMEN ÇOPUR" data-t="kopyala_kisa">📋 Kopyala</button>
+          </div>
+          <div class="satir">
+            <span><span data-t="aciklama">Açıklama:</span><br><b>DENİZ EYMEN</b></span>
+            <button class="kucuk-kopyala" type="button" data-kopya="DENİZ EYMEN" data-t="kopyala_kisa">📋 Kopyala</button>
+          </div>
+        </div>
+        <a class="buton b-kart" href="https://www.shopier.com/dmddenizeymen" target="_blank" rel="noopener">
+          <span class="ikon">💳</span>
+          <span><span data-t="kart">Kredi kartı ile bağış</span><small data-t="kart_alt">Shopier güvenli ödeme sayfası</small></span>
+        </a>
+      </div>
+
+      <div id="bolum-yd">
+        <h3 data-t="yurtdisi">🌍 Yurtdışından</h3>
+        <a class="buton b-paypal" id="b-paypal" href="https://www.paypal.com/pools/c/9tfJFAFicj" target="_blank" rel="noopener">
+          <span class="ikon">🅿️</span>
+          <span>PayPal<small data-t="paypal_alt">Kart veya PayPal hesabı ile</small></span>
+        </a>
+        <a class="buton b-gofundme" href="https://gofund.me/45c5fe7d7" target="_blank" rel="noopener">
+          <span class="ikon">💚</span>
+          <span>GoFundMe<small data-t="gofundme_alt">Kart, Apple Pay, Google Pay</small></span>
+        </a>
+        <div class="hesap">
+          <div class="hesap-ust"><span class="para">$ USD</span><span class="banka">DenizBank</span></div>
+          <div class="iban">TR70 0013 4000 0257 4395 0000 06</div>
+          <button class="kopyala" type="button" data-kopya="TR700013400002574395000006" data-t="kopyala">📋 IBAN'ı kopyala</button>
+        </div>
+        <div class="hesap">
+          <div class="hesap-ust"><span class="para">€ EUR</span><span class="banka">DenizBank</span></div>
+          <div class="iban">TR97 0013 4000 0257 4395 0000 05</div>
+          <button class="kopyala" type="button" data-kopya="TR970013400002574395000005" data-t="kopyala">📋 IBAN'ı kopyala</button>
+          <div class="satir">
+            <span>SWIFT / BIC<br><b>DENITRISXXX</b></span>
+            <button class="kucuk-kopyala" type="button" data-kopya="DENITRISXXX" data-t="kopyala_kisa">📋 Kopyala</button>
+          </div>
+          <div class="satir">
+            <span><span data-t="alici">Alıcı adı:</span><br><b>DENİZ EYMEN ÇOPUR</b></span>
+            <button class="kucuk-kopyala" type="button" data-kopya="DENIZ EYMEN COPUR" data-t="kopyala_kisa">📋 Kopyala</button>
+          </div>
+        </div>
+        <div class="hesap">
+          <div class="hesap-ust"><span class="para">€ <span data-t="avrupa">Avrupa hesabı</span></span><span class="banka">ING (NL)</span></div>
+          <div class="iban">NL09 INGB 0119 7836 06</div>
+          <button class="kopyala" type="button" data-kopya="NL09INGB0119783606" data-t="kopyala">📋 IBAN'ı kopyala</button>
+          <div class="satir">
+            <span><span data-t="alici">Alıcı adı:</span><br><b>SMA DMD KIDS</b></span>
+            <button class="kucuk-kopyala" type="button" data-kopya="SMA DMD KIDS" data-t="kopyala_kisa">📋 Kopyala</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="yayin-kutu alt-bolum" id="yayin-kutu">
+    <div class="yayin-saat" id="yayin-saat"></div>
+    <a class="buton b-canli" id="b-canli" href="https://www.instagram.com/dmddenizeymen/" target="_blank" rel="noopener">
+      <span class="ikon">📺</span>
+      <span><span data-t="canli">Canlı yayına katıl</span><small data-t="canli_alt">Instagram'da açılır</small></span>
+    </a>
+    <a class="takvim" id="b-takvim" target="_blank" rel="noopener" data-t="takvim">📅 Takvimime ekle</a>
+  </section>
+
+  <a class="buton b-video" id="b-video" href="https://www.instagram.com/dmddenizeymen/reels/" target="_blank" rel="noopener">
+    <span class="ikon">❤️</span>
+    <span><span data-t="video">Son videoyu aç</span><small data-t="video_alt">Beğen ve paylaş, daha çok kişi görsün</small></span>
+  </a>
+
+  <button class="buton b-paylas wa" id="b-paylas" type="button">
+    <span class="ikon">📤</span>
+    <span><span data-t="paylas">Arkadaşlarına gönder</span><small data-t="paylas_alt">WhatsApp ile tek dokunuş</small></span>
+  </button>
+
+  <section class="alt-bolum">
+    <h2 data-t="destek">🤝 Bize destek olun</h2>
+    <a class="buton b-whatsapp" href="https://chat.whatsapp.com/EX1n4sVCMVc8QzsQnnRQ3m" target="_blank" rel="noopener">
+      <span class="ikon">🤝</span>
+      <span><span data-t="gonullu">Gönüllü grubumuza katılın</span><small data-t="gonullu_alt">WhatsApp grubu</small></span>
+    </a>
+    <a class="buton b-ara" href="tel:+905543776756">
+      <span class="ikon">📞</span>
+      <span><span data-t="baba">Babayı ara (Çağatay Çopur)</span><small dir="ltr">+90 554 377 67 56</small></span>
+    </a>
+    <a class="buton b-ara" href="tel:+905312287095">
+      <span class="ikon">📞</span>
+      <span><span data-t="anne">Anneyi ara (Sahra Çopur)</span><small dir="ltr">+90 531 228 70 95</small></span>
+    </a>
+  </section>
+
+  <section class="alt-bolum">
+    <h2 data-t="takip">📲 Bizi takip edin</h2>
+    <div class="sosyal">
+      <a href="https://instagram.com/dmddenizeymen/" target="_blank" rel="noopener">📷 Instagram</a>
+      <a href="https://www.facebook.com/share/18CqJSN5qf/" target="_blank" rel="noopener">👍 Facebook</a>
+      <a href="https://www.tiktok.com/@dmddenizeymen" target="_blank" rel="noopener">🎵 TikTok</a>
+      <a href="https://x.com/dmddenizeymen" target="_blank" rel="noopener">✖️ X</a>
+    </div>
+  </section>
+
+  <p class="resmi" data-t="resmi">Resmi Instagram hesabı: @dmddenizeymen · Başka hesaplara itibar etmeyin</p>
+</main>
+
+<div class="belge-perde gizli" id="belge-perde" role="dialog" aria-modal="true">
+  <div class="belge-ic">
+    <button class="belge-kapat" id="b-kapat" type="button" data-t="kapat">✕ Kapat</button>
+    <div id="belge-liste"></div>
+  </div>
+</div>
+
+<div class="belge-perde gizli" id="kur-perde" role="dialog" aria-modal="true">
+  <div class="belge-ic">
+    <button class="belge-kapat" id="b-kur-kapat" type="button" data-t="kapat">✕ Kapat</button>
+    <div class="kur-kutu" id="kur-kutu"></div>
+  </div>
+</div>
+
+<script>
+// ===================== AİLENİN DEĞİŞTİRECEĞİ YER =====================
+// Google E-Tablo kullanılıyorsa sadece "tabloCsv" doldurulur; diğer
+// değerler tablodan gelir. Boş bırakılırsa aşağıdaki değerler kullanılır.
+const AYARLAR = {
+  tabloCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT4vcH7tWy8iyoSg-DTiYVqAjBGTWuIL_LFXzw_b2ExcafWkQYQnT_AX8yln_WfbkFB4OY1u-pbPDRD/pub?gid=0&single=true&output=csv",
+  canliYayin: "2026-10-29 21:00",   // Türkiye saati, biçim: YYYY-AA-GG SS:DD
+  sonVideo: "https://www.instagram.com/dmddenizeymen/reels/",
+  yuzde: 21,
+  paypal: "https://www.paypal.com/pools/c/9tfJFAFicj",
+  // Ailenin telefondan doldurduğu Google Form'un yanıt tablosu
+  formCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKIHNO_FyA3YT0jbcjBKRrsgZWG06FWhPrxJTWVNN-DxdUGTu4inHbZ4A1hnjhOjxmpCe_NEijS0zU/pub?gid=345362036&single=true&output=csv",
+};
+
+// İzin belgeleri: dosyalar "belgeler" klasörüne konur (jpg, png veya pdf)
+const BELGELER = [
+  { dosya: "belgeler/valilik-izni.webp", baslik: "İzmir Valiliği · Yardım Toplama İzin Belgesi" },
+];
+// =====================================================================
+
+const PROFIL = "https://www.instagram.com/dmddenizeymen/";
+const BAGIS_SAYFASI = "#bagislar";
+const SMS_NO = "9097";
+const SMS_METIN = "DENİZ";
+const YAYIN_SURESI_DK = 120;
+
+const METIN = {
+  tr: {
+    rozet: "DMD SAVAŞÇISI",
+    alt: "3 yaşında, Elevidys gen tedavisi için desteğinizi bekliyor 💙",
+    hedef: "Hedef: 2,9 milyon $",
+    canli: "Canlı yayına katıl",
+    canli_alt: "Instagram'da açılır",
+    takvim: "📅 Takvimime ekle",
+    sonraki: "Sonraki canlı yayın:",
+    kalan_gun: "{g} gün {s} saat sonra",
+    kalan_saat: "{s} saat {d} dakika sonra",
+    kalan_dk: "{d} dakika sonra",
+    simdi: "🔴 ŞU AN CANLI YAYINDA!",
+    yakinda: "Yeni canlı yayın yakında duyurulacak",
+    sms: "SMS ile bağış yap",
+    sms_alt: "Tek dokunuş · 1 SMS = 100 TL",
+    sms_not: "Mesaj hazır açılır, sadece “Gönder”e basın. (Türkiye'deki tüm hatlar)",
+    video: "Son videoyu aç",
+    video_alt: "Beğen ve paylaş, daha çok kişi görsün",
+    paylas: "Arkadaşlarına gönder",
+    paylas_alt: "WhatsApp ile tek dokunuş",
+    bagislar: "💙 Bağışlar",
+    bagislar_alt: "Valilik onaylı resmi hesaplar · Dokunun, kopyalansın",
+    turkiye: "🇹🇷 Türkiye'den",
+    kopyala: "📋 IBAN'ı kopyala",
+    kopyala_kisa: "📋 Kopyala",
+    kopyalandi: "✓ Kopyalandı! Banka uygulamanıza yapıştırın",
+    kopyalandi_kisa: "✓ Kopyalandı",
+    alici: "Alıcı adı:",
+    aciklama: "Açıklama:",
+    kart: "Kredi kartı ile bağış",
+    kart_alt: "Shopier güvenli ödeme sayfası",
+    yurtdisi: "🌍 Yurtdışından",
+    paypal_alt: "Kart veya PayPal hesabı ile",
+    gofundme_alt: "Kart, Apple Pay, Google Pay",
+    avrupa: "Avrupa hesabı",
+    destek: "🤝 Bize destek olun",
+    gonullu: "Gönüllü grubumuza katılın",
+    gonullu_alt: "WhatsApp grubu",
+    baba: "Babayı ara (Çağatay Çopur)",
+    anne: "Anneyi ara (Sahra Çopur)",
+    takip: "📲 Bizi takip edin",
+    resmi: "Resmi Instagram hesabı: @dmddenizeymen · Başka hesaplara itibar etmeyin",
+    izin_baslik: "✅ VALİLİK ONAYLI KAMPANYA",
+    izin_no: "Faaliyet No:",
+    izin_alt: "İzmir Valiliği izinli · Türkiye geneli · Geçerlilik: 21.01.2026 – 20.01.2027. Bağışlar sadece Deniz Eymen Çopur adına açılmış resmi hesaplara gider.",
+    belgeler: "📄 İzin belgelerini görüntüle",
+    kapat: "✕ Kapat",
+    kur: "📲 Telefonuma ekle",
+    kur_baslik: "Ana ekrana ekleme",
+    kur_ios: ["Ekranın altındaki <b>Paylaş</b> düğmesine dokunun (yukarı oklu kare ⬆️).", "Listeyi kaydırıp <b>Ana Ekrana Ekle</b>'ye dokunun.", "Sağ üstteki <b>Ekle</b>'ye dokunun."],
+    kur_android: ["Sağ üstteki <b>⋮</b> (üç nokta) menüsüne dokunun.", "<b>Ana ekrana ekle</b> veya <b>Uygulamayı yükle</b>'ye dokunun.", "<b>Ekle</b>'ye dokunun."],
+    kur_uygulama: ["Bu sayfa Instagram / WhatsApp içinde açıldı; buradan eklenemiyor.", "Sağ üstteki <b>⋯</b> menüsüne dokunup <b>Tarayıcıda aç</b>'ı seçin.", "Açılan sayfada tekrar <b>📲 Telefonuma ekle</b>'ye dokunun."],
+    mesaj: "💙 3 yaşındaki DMD savaşçısı Deniz Eymen'in desteğe ihtiyacı var. Tek dokunuşla destek olabilirsin:",
+    takvim_baslik: "Deniz Eymen canlı yayın 💙",
+  },
+  en: {
+    rozet: "DMD WARRIOR",
+    alt: "3 years old, needs your support for Elevidys gene therapy 💙",
+    hedef: "Goal: $2.9 million",
+    canli: "Join the live stream",
+    canli_alt: "Opens in Instagram",
+    takvim: "📅 Add to my calendar",
+    sonraki: "Next live stream:",
+    kalan_gun: "in {g} days {s} hours",
+    kalan_saat: "in {s} hours {d} minutes",
+    kalan_dk: "in {d} minutes",
+    simdi: "🔴 LIVE NOW!",
+    yakinda: "Next live stream will be announced soon",
+    sms: "Donate",
+    sms_alt: "Bank, PayPal or GoFundMe",
+    sms_not: "",
+    video: "Open the latest video",
+    video_alt: "Like and share so more people see it",
+    paylas: "Send to your friends",
+    paylas_alt: "One tap on WhatsApp",
+    bagislar: "💙 Donations",
+    bagislar_alt: "Official government-approved accounts · Tap to copy",
+    turkiye: "🇹🇷 From Turkey",
+    kopyala: "📋 Copy IBAN",
+    kopyala_kisa: "📋 Copy",
+    kopyalandi: "✓ Copied! Paste it in your banking app",
+    kopyalandi_kisa: "✓ Copied",
+    alici: "Recipient name:",
+    aciklama: "Reference:",
+    kart: "Donate by credit card",
+    kart_alt: "Shopier secure payment page",
+    yurtdisi: "🌍 From abroad",
+    paypal_alt: "With card or PayPal account",
+    gofundme_alt: "Card, Apple Pay, Google Pay",
+    avrupa: "Europe account",
+    destek: "🤝 Help us",
+    gonullu: "Join our volunteer group",
+    gonullu_alt: "WhatsApp group",
+    baba: "Call father (Çağatay Çopur)",
+    anne: "Call mother (Sahra Çopur)",
+    takip: "📲 Follow us",
+    resmi: "Official Instagram account: @dmddenizeymen · Beware of fake accounts",
+    izin_baslik: "✅ GOVERNMENT-APPROVED CAMPAIGN",
+    izin_no: "Permit No:",
+    izin_alt: "Approved by the Governorship of İzmir · Valid 21.01.2026 – 20.01.2027. Donations go only to official accounts in the name of Deniz Eymen Çopur.",
+    belgeler: "📄 View permit documents",
+    kapat: "✕ Close",
+    kur: "📲 Add to my phone",
+    kur_baslik: "Add to home screen",
+    kur_ios: ["Tap the <b>Share</b> button at the bottom (square with an arrow ⬆️).", "Scroll down and tap <b>Add to Home Screen</b>.", "Tap <b>Add</b> at the top right."],
+    kur_android: ["Tap the <b>⋮</b> menu at the top right.", "Tap <b>Add to Home screen</b> or <b>Install app</b>.", "Tap <b>Add</b>."],
+    kur_uygulama: ["This page is open inside Instagram / WhatsApp and can't be added from here.", "Tap the <b>⋯</b> menu at the top right and choose <b>Open in browser</b>.", "Then tap <b>📲 Add to my phone</b> again."],
+    mesaj: "💙 Deniz Eymen, a 3-year-old boy fighting Duchenne muscular dystrophy, needs our help. Support him with one tap:",
+    takvim_baslik: "Deniz Eymen live stream 💙",
+  },
+  de: {
+    rozet: "DMD-KÄMPFER",
+    alt: "3 Jahre alt, braucht Ihre Hilfe für die Elevidys-Gentherapie 💙",
+    hedef: "Ziel: 2,9 Mio. $",
+    canli: "Zum Livestream",
+    canli_alt: "Öffnet sich in Instagram",
+    takvim: "📅 In meinen Kalender",
+    sonraki: "Nächster Livestream:",
+    kalan_gun: "in {g} Tagen {s} Stunden",
+    kalan_saat: "in {s} Std. {d} Min.",
+    kalan_dk: "in {d} Minuten",
+    simdi: "🔴 JETZT LIVE!",
+    yakinda: "Der nächste Livestream wird bald angekündigt",
+    sms: "Spenden",
+    sms_alt: "Bank, PayPal oder GoFundMe",
+    sms_not: "",
+    video: "Neuestes Video öffnen",
+    video_alt: "Liken und teilen, damit es mehr Menschen sehen",
+    paylas: "An Freunde senden",
+    paylas_alt: "Mit einem Tipp über WhatsApp",
+    bagislar: "💙 Spenden",
+    bagislar_alt: "Offizielle, behördlich genehmigte Konten · Antippen zum Kopieren",
+    turkiye: "🇹🇷 Aus der Türkei",
+    kopyala: "📋 IBAN kopieren",
+    kopyala_kisa: "📋 Kopieren",
+    kopyalandi: "✓ Kopiert! In Ihre Banking-App einfügen",
+    kopyalandi_kisa: "✓ Kopiert",
+    alici: "Empfänger:",
+    aciklama: "Verwendungszweck:",
+    kart: "Mit Kreditkarte spenden",
+    kart_alt: "Sichere Zahlungsseite von Shopier",
+    yurtdisi: "🌍 Aus dem Ausland",
+    paypal_alt: "Mit Karte oder PayPal-Konto",
+    gofundme_alt: "Karte, Apple Pay, Google Pay",
+    avrupa: "Europa-Konto",
+    destek: "🤝 Unterstützen Sie uns",
+    gonullu: "Unserer Helfergruppe beitreten",
+    gonullu_alt: "WhatsApp-Gruppe",
+    baba: "Vater anrufen (Çağatay Çopur)",
+    anne: "Mutter anrufen (Sahra Çopur)",
+    takip: "📲 Folgen Sie uns",
+    resmi: "Offizielles Instagram-Konto: @dmddenizeymen · Vorsicht vor gefälschten Konten",
+    izin_baslik: "✅ BEHÖRDLICH GENEHMIGTE KAMPAGNE",
+    izin_no: "Genehmigungs-Nr.:",
+    izin_alt: "Genehmigt vom Gouverneursamt İzmir · Gültig 21.01.2026 – 20.01.2027. Spenden gehen nur auf offizielle Konten im Namen von Deniz Eymen Çopur.",
+    belgeler: "📄 Genehmigungsdokumente ansehen",
+    kapat: "✕ Schließen",
+    kur: "📲 Auf mein Handy",
+    kur_baslik: "Zum Startbildschirm hinzufügen",
+    kur_ios: ["Tippen Sie unten auf <b>Teilen</b> (Quadrat mit Pfeil ⬆️).", "Nach unten scrollen und <b>Zum Home-Bildschirm</b> tippen.", "Oben rechts auf <b>Hinzufügen</b> tippen."],
+    kur_android: ["Oben rechts auf das <b>⋮</b>-Menü tippen.", "<b>Zum Startbildschirm hinzufügen</b> oder <b>App installieren</b> tippen.", "<b>Hinzufügen</b> tippen."],
+    kur_uygulama: ["Diese Seite ist in Instagram / WhatsApp geöffnet und kann hier nicht hinzugefügt werden.", "Oben rechts auf <b>⋯</b> tippen und <b>Im Browser öffnen</b> wählen.", "Dann erneut <b>📲 Auf mein Handy</b> tippen."],
+    mesaj: "💙 Deniz Eymen, ein 3-jähriger Junge mit Duchenne-Muskeldystrophie, braucht unsere Hilfe. Mit einem Tipp unterstützen:",
+    takvim_baslik: "Deniz Eymen Livestream 💙",
+  },
+  fr: {
+    rozet: "GUERRIER DMD",
+    alt: "3 ans, il a besoin de votre soutien pour la thérapie génique Elevidys 💙",
+    hedef: "Objectif : 2,9 millions $",
+    canli: "Rejoindre le direct",
+    canli_alt: "S'ouvre dans Instagram",
+    takvim: "📅 Ajouter à mon agenda",
+    sonraki: "Prochain direct :",
+    kalan_gun: "dans {g} jours {s} heures",
+    kalan_saat: "dans {s} heures {d} minutes",
+    kalan_dk: "dans {d} minutes",
+    simdi: "🔴 EN DIRECT !",
+    yakinda: "Le prochain direct sera bientôt annoncé",
+    sms: "Faire un don",
+    sms_alt: "Virement, PayPal ou GoFundMe",
+    sms_not: "",
+    video: "Voir la dernière vidéo",
+    video_alt: "Aimez et partagez pour qu'elle touche plus de monde",
+    paylas: "Envoyer à vos amis",
+    paylas_alt: "En un geste sur WhatsApp",
+    bagislar: "💙 Dons",
+    bagislar_alt: "Comptes officiels autorisés par l'État · Touchez pour copier",
+    turkiye: "🇹🇷 Depuis la Turquie",
+    kopyala: "📋 Copier l'IBAN",
+    kopyala_kisa: "📋 Copier",
+    kopyalandi: "✓ Copié ! Collez-le dans votre appli bancaire",
+    kopyalandi_kisa: "✓ Copié",
+    alici: "Bénéficiaire :",
+    aciklama: "Motif :",
+    kart: "Don par carte bancaire",
+    kart_alt: "Page de paiement sécurisée Shopier",
+    yurtdisi: "🌍 Depuis l'étranger",
+    paypal_alt: "Par carte ou compte PayPal",
+    gofundme_alt: "Carte, Apple Pay, Google Pay",
+    avrupa: "Compte en Europe",
+    destek: "🤝 Aidez-nous",
+    gonullu: "Rejoindre notre groupe de bénévoles",
+    gonullu_alt: "Groupe WhatsApp",
+    baba: "Appeler le père (Çağatay Çopur)",
+    anne: "Appeler la mère (Sahra Çopur)",
+    takip: "📲 Suivez-nous",
+    resmi: "Compte Instagram officiel : @dmddenizeymen · Attention aux faux comptes",
+    izin_baslik: "✅ CAMPAGNE AUTORISÉE PAR L'ÉTAT",
+    izin_no: "N° d'autorisation :",
+    izin_alt: "Autorisée par le Gouvernorat d'İzmir · Valable du 21.01.2026 au 20.01.2027. Les dons vont uniquement aux comptes officiels au nom de Deniz Eymen Çopur.",
+    belgeler: "📄 Voir les documents d'autorisation",
+    kapat: "✕ Fermer",
+    kur: "📲 Ajouter à mon téléphone",
+    kur_baslik: "Ajouter à l'écran d'accueil",
+    kur_ios: ["Touchez le bouton <b>Partager</b> en bas (carré avec une flèche ⬆️).", "Faites défiler et touchez <b>Sur l'écran d'accueil</b>.", "Touchez <b>Ajouter</b> en haut à droite."],
+    kur_android: ["Touchez le menu <b>⋮</b> en haut à droite.", "Touchez <b>Ajouter à l'écran d'accueil</b> ou <b>Installer l'application</b>.", "Touchez <b>Ajouter</b>."],
+    kur_uygulama: ["Cette page est ouverte dans Instagram / WhatsApp et ne peut pas être ajoutée d'ici.", "Touchez le menu <b>⋯</b> en haut à droite et choisissez <b>Ouvrir dans le navigateur</b>.", "Touchez ensuite à nouveau <b>📲 Ajouter à mon téléphone</b>."],
+    mesaj: "💙 Deniz Eymen, un petit garçon de 3 ans atteint de la myopathie de Duchenne, a besoin de notre aide. Soutenez-le en un geste :",
+    takvim_baslik: "Direct de Deniz Eymen 💙",
+  },
+  ar: {
+    rozet: "محارب ضمور العضلات",
+    alt: "عمره ٣ سنوات، ويحتاج دعمكم للعلاج الجيني إليفيديس 💙",
+    hedef: "الهدف: ٢٫٩ مليون دولار",
+    canli: "انضم إلى البث المباشر",
+    canli_alt: "يفتح في إنستغرام",
+    takvim: "📅 أضف إلى تقويمي",
+    sonraki: "البث المباشر القادم:",
+    kalan_gun: "بعد {g} يوم و{s} ساعة",
+    kalan_saat: "بعد {s} ساعة و{d} دقيقة",
+    kalan_dk: "بعد {d} دقيقة",
+    simdi: "🔴 مباشر الآن!",
+    yakinda: "سيتم الإعلان عن البث القادم قريبًا",
+    sms: "تبرّع",
+    sms_alt: "بنك أو PayPal أو GoFundMe",
+    sms_not: "",
+    video: "افتح أحدث فيديو",
+    video_alt: "أعجب به وشاركه ليصل إلى المزيد",
+    paylas: "أرسل إلى أصدقائك",
+    paylas_alt: "بلمسة واحدة عبر واتساب",
+    bagislar: "💙 التبرعات",
+    bagislar_alt: "حسابات رسمية معتمدة · المس للنسخ",
+    turkiye: "🇹🇷 من تركيا",
+    kopyala: "📋 انسخ رقم IBAN",
+    kopyala_kisa: "📋 نسخ",
+    kopyalandi: "✓ تم النسخ! الصقه في تطبيق البنك",
+    kopyalandi_kisa: "✓ تم النسخ",
+    alici: "اسم المستفيد:",
+    aciklama: "البيان:",
+    kart: "التبرع بالبطاقة الائتمانية",
+    kart_alt: "صفحة الدفع الآمنة Shopier",
+    yurtdisi: "🌍 من خارج تركيا",
+    paypal_alt: "بالبطاقة أو حساب PayPal",
+    gofundme_alt: "بطاقة، Apple Pay، Google Pay",
+    avrupa: "حساب أوروبا",
+    destek: "🤝 ساندونا",
+    gonullu: "انضم إلى مجموعة المتطوعين",
+    gonullu_alt: "مجموعة واتساب",
+    baba: "اتصل بالأب (چاغاتاي چوبور)",
+    anne: "اتصل بالأم (صحراء چوبور)",
+    takip: "📲 تابعونا",
+    resmi: "حساب إنستغرام الرسمي: @dmddenizeymen · احذروا الحسابات المزيفة",
+    izin_baslik: "✅ حملة معتمدة رسميًا",
+    izin_no: "رقم التصريح:",
+    izin_alt: "معتمدة من ولاية إزمير · صالحة من 21.01.2026 إلى 20.01.2027. تذهب التبرعات فقط إلى الحسابات الرسمية باسم دنيز أيمن چوبور.",
+    belgeler: "📄 عرض وثائق التصريح",
+    kapat: "✕ إغلاق",
+    kur: "📲 أضف إلى هاتفي",
+    kur_baslik: "الإضافة إلى الشاشة الرئيسية",
+    kur_ios: ["اضغط زر <b>المشاركة</b> في أسفل الشاشة (مربع بسهم ⬆️).", "مرّر للأسفل واضغط <b>إضافة إلى الشاشة الرئيسية</b>.", "اضغط <b>إضافة</b> في الأعلى."],
+    kur_android: ["اضغط قائمة <b>⋮</b> في الأعلى.", "اضغط <b>إضافة إلى الشاشة الرئيسية</b> أو <b>تثبيت التطبيق</b>.", "اضغط <b>إضافة</b>."],
+    kur_uygulama: ["هذه الصفحة مفتوحة داخل إنستغرام / واتساب ولا يمكن إضافتها من هنا.", "اضغط قائمة <b>⋯</b> في الأعلى واختر <b>فتح في المتصفح</b>.", "ثم اضغط <b>📲 أضف إلى هاتفي</b> مرة أخرى."],
+    mesaj: "💙 دنيز أيمن طفل عمره ٣ سنوات يحارب ضمور العضلات الدوشيني ويحتاج مساعدتنا. ادعمه بلمسة واحدة:",
+    takvim_baslik: "بث مباشر - دنيز أيمن 💙",
+  },
+};
+
+const $ = (id) => document.getElementById(id);
+let dil = "tr";
+let ayar = { ...AYARLAR };
+
+function kayitliDil() {
+  try { return localStorage.getItem("dil"); } catch (e) { return null; }
+}
+
+function dilSec() {
+  const kayit = kayitliDil();
+  if (kayit && METIN[kayit]) return kayit;
+  const tarayici = (navigator.language || "tr").slice(0, 2).toLowerCase();
+  return METIN[tarayici] ? tarayici : "en";
+}
+
+// "2026-10-29 21:00" veya E-Tablo'nun çevirdiği "29.10.2026 21:00:00", Türkiye saati (UTC+3) → Date
+function yayinTarihi(deger) {
+  const metin = String(deger || "").trim();
+  let m = metin.match(/^(\d{4})-(\d{1,2})-(\d{1,2})[ T](\d{1,2}):(\d{2})/);
+  if (m) return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4] - 3, +m[5]));
+  m = metin.match(/^(\d{1,2})[./](\d{1,2})[./](\d{4}) (\d{1,2}):(\d{2})/);
+  if (m) return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1], +m[4] - 3, +m[5]));
+  return null;
+}
+
+function doldur(sablon, degerler) {
+  return sablon.replace(/\{(\w)\}/g, (_, k) => degerler[k]);
+}
+
+function yayinGoster() {
+  const t = METIN[dil];
+  const bas = yayinTarihi(ayar.canliYayin);
+  const simdi = new Date();
+  const saat = $("yayin-saat");
+  const takvim = $("b-takvim");
+
+  if (bas && simdi >= bas && simdi - bas < YAYIN_SURESI_DK * 60000) {
+    saat.innerHTML = `<span class="canli-simdi">${t.simdi}</span>`;
+    takvim.classList.add("gizli");
+    return;
+  }
+  if (!bas || simdi > bas) {
+    saat.textContent = t.yakinda;
+    takvim.classList.add("gizli");
+    return;
+  }
+
+  const yerel = new Intl.DateTimeFormat(dil === "ar" ? "ar" : dil, {
+    weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit",
+  }).format(bas);
+  const fark = Math.floor((bas - simdi) / 60000);
+  const g = Math.floor(fark / 1440), s = Math.floor((fark % 1440) / 60), d = fark % 60;
+  const kalan = g > 0 ? doldur(t.kalan_gun, { g, s })
+              : s > 0 ? doldur(t.kalan_saat, { s, d })
+              : doldur(t.kalan_dk, { d });
+  saat.innerHTML = "";
+  saat.append(`${t.sonraki} ${yerel}`);
+  const k = document.createElement("span");
+  k.className = "yayin-kalan";
+  k.textContent = kalan;
+  saat.append(k);
+
+  const bicim = (tarih) => tarih.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const bitis = new Date(bas.getTime() + 60 * 60000);
+  takvim.href = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + "&text=" + encodeURIComponent(t.takvim_baslik)
+    + "&dates=" + bicim(bas) + "/" + bicim(bitis)
+    + "&details=" + encodeURIComponent(PROFIL);
+  takvim.classList.remove("gizli");
+}
+
+function uygula() {
+  const t = METIN[dil];
+  document.documentElement.lang = dil;
+  document.documentElement.dir = dil === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t[el.dataset.t] || ""; });
+  document.querySelectorAll(".diller button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.dil === dil));
+
+  // SMS bağışı sadece Türkiye hatlarında çalışır; diğer dillerde bağış sayfasına gider.
+  const sms = $("b-sms");
+  sms.href = dil === "tr" ? `sms:${SMS_NO}?&body=${encodeURIComponent(SMS_METIN)}` : BAGIS_SAYFASI;
+  $("sms-not").classList.toggle("gizli", !t.sms_not);
+
+  const yuzde = Math.max(0, Math.min(100, Number(ayar.yuzde) || 0));
+  $("yuzde-yazi").textContent = dil === "tr" ? `%${yuzde}` : `${yuzde}%`;
+  $("cubuk").style.width = yuzde + "%";
+
+  $("b-canli").href = PROFIL;
+  $("b-video").href = ayar.sonVideo || PROFIL;
+  $("b-paypal").href = ayar.paypal;
+  // Yurtdışındaki ziyaretçi önce kendi bağış yollarını görsün
+  $("bolum-tr").style.order = dil === "tr" ? 1 : 2;
+  $("bolum-yd").style.order = dil === "tr" ? 2 : 1;
+  document.querySelectorAll("[data-kopya]").forEach((b) => b.classList.remove("tamam"));
+  yayinGoster();
+}
+
+function paylas() {
+  const link = location.origin + location.pathname;
+  const metin = METIN[dil].mesaj + "\n" + link;
+  location.href = "https://wa.me/?text=" + encodeURIComponent(metin);
+}
+
+// CSV satırı → hücreler; tırnak içindeki virgüller hücreyi bölmez
+function csvHucreler(satir) {
+  const hucreler = satir.match(/("([^"]|"")*"|[^,]*)(,|$)/g) || [];
+  return hucreler.map((h) => h.replace(/,$/, "").replace(/^"|"$/g, "").replace(/""/g, '"').trim());
+}
+
+function degerAyarla(k, deger) {
+  if (!deger) return;
+  if (k === "canli_yayin") ayar.canliYayin = deger;
+  if (k === "son_video") ayar.sonVideo = deger;
+  // Bağış linki olduğu için sadece gerçek PayPal adresleri kabul edilir
+  if (k === "paypal" && /^https:\/\/(www\.)?(paypal\.com|paypal\.me)\//i.test(deger)) ayar.paypal = deger;
+  if (k === "yuzde") ayar.yuzde = deger.replace(/[^\d.]/g, "");
+}
+
+// Form sorularının başlığından hangi ayar olduğunu bulur
+function formSutunu(baslik) {
+  const b = baslik.toLocaleLowerCase("tr");
+  if (b.includes("canlı yayın")) return "canli_yayin";
+  if (b.includes("video")) return "son_video";
+  if (b.includes("yüzde")) return "yuzde";
+  if (b.includes("paypal")) return "paypal";
+  return null;
+}
+
+async function csvOku(adres) {
+  const yanit = await fetch(adres, { cache: "no-store" });
+  if (!yanit.ok) return [];
+  return (await yanit.text()).split(/\r?\n/).filter(Boolean).map(csvHucreler);
+}
+
+// Önce E-Tablo (A sütunu anahtar, B sütunu değer), sonra Google Form yanıtları okunur.
+// Formda her soru için en son doldurulmuş yanıt geçerlidir; boş bırakılan sorular eski değeri korur.
+async function tabloyuOku() {
+  try {
+    if (ayar.tabloCsv) {
+      for (const [anahtar, deger] of await csvOku(ayar.tabloCsv)) degerAyarla((anahtar || "").toLowerCase(), deger);
+    }
+    if (ayar.formCsv) {
+      const [baslik, ...yanitlar] = await csvOku(ayar.formCsv);
+      const sutunlar = (baslik || []).map(formSutunu);
+      for (const yanit of yanitlar) sutunlar.forEach((k, i) => k && degerAyarla(k, yanit[i]));
+    }
+  } catch (e) { /* okunamazsa son bilinen değerler kalır */ }
+  uygula();
+}
+
+async function panoya(metin) {
+  try {
+    await navigator.clipboard.writeText(metin);
+    return true;
+  } catch (e) {
+    const alan = document.createElement("textarea");
+    alan.value = metin;
+    alan.setAttribute("readonly", "");
+    alan.style.position = "fixed";
+    alan.style.opacity = "0";
+    document.body.append(alan);
+    alan.select();
+    let oldu = false;
+    try { oldu = document.execCommand("copy"); } catch (e2) {}
+    alan.remove();
+    return oldu;
+  }
+}
+
+document.querySelectorAll("[data-kopya]").forEach((btn) => btn.addEventListener("click", async () => {
+  if (!(await panoya(btn.dataset.kopya))) return;
+  const kisa = btn.classList.contains("kucuk-kopyala");
+  btn.textContent = METIN[dil][kisa ? "kopyalandi_kisa" : "kopyalandi"];
+  btn.classList.add("tamam");
+  clearTimeout(btn._zaman);
+  btn._zaman = setTimeout(() => {
+    btn.textContent = METIN[dil][btn.dataset.t];
+    btn.classList.remove("tamam");
+  }, 3000);
+}));
+
+function belgeleriAc() {
+  const liste = $("belge-liste");
+  liste.innerHTML = "";
+  for (const belge of BELGELER) {
+    const kutu = document.createElement("div");
+    kutu.className = "belge";
+    const baslik = document.createElement("h2");
+    baslik.textContent = belge.baslik || "";
+    kutu.append(baslik);
+    if (/\.pdf$/i.test(belge.dosya)) {
+      const a = document.createElement("a");
+      a.href = belge.dosya;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = "📄 PDF →";
+      kutu.append(a);
+    } else {
+      const img = document.createElement("img");
+      img.src = belge.dosya;
+      img.alt = belge.baslik || "";
+      img.loading = "lazy";
+      kutu.append(img);
+    }
+    liste.append(kutu);
+  }
+  $("belge-perde").classList.remove("gizli");
+  document.body.style.overflow = "hidden";
+  $("b-kapat").focus();
+}
+
+function belgeleriKapat() {
+  $("belge-perde").classList.add("gizli");
+  document.body.style.overflow = "";
+  $("b-belgeler").focus();
+}
+
+$("b-belgeler").classList.toggle("gizli", BELGELER.length === 0);
+$("b-belgeler").addEventListener("click", belgeleriAc);
+$("b-kapat").addEventListener("click", belgeleriKapat);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$("belge-perde").classList.contains("gizli")) belgeleriKapat();
+});
+
+// Ana ekrana ekleme: Android/Chrome'da tek dokunuşla yükleme penceresi açılır;
+// iPhone'da ve Instagram/WhatsApp içinde tarayıcı buna izin vermediği için adımlar gösterilir.
+let yuklemeIstegi = null;
+const ekliMi = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const ua = navigator.userAgent;
+const uygulamaIci = /Instagram|FBAN|FBAV|WhatsApp|Line\//i.test(ua);
+const iPhoneMu = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+$("b-kur").classList.toggle("gizli", ekliMi);
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  yuklemeIstegi = e;
+});
+window.addEventListener("appinstalled", () => $("b-kur").classList.add("gizli"));
+
+function kurAdimlariGoster() {
+  const t = METIN[dil];
+  const adimlar = uygulamaIci ? t.kur_uygulama : iPhoneMu ? t.kur_ios : t.kur_android;
+  // Metinler sabit çeviri tablosundan gelir, kullanıcı girdisi içermez
+  $("kur-kutu").innerHTML = `<h2>📲 ${t.kur_baslik}</h2><ol>${adimlar.map((a) => `<li>${a}</li>`).join("")}</ol>`;
+  $("kur-perde").classList.remove("gizli");
+  document.body.style.overflow = "hidden";
+  $("b-kur-kapat").focus();
+}
+
+function kurAdimlariKapat() {
+  $("kur-perde").classList.add("gizli");
+  document.body.style.overflow = "";
+  $("b-kur").focus();
+}
+
+$("b-kur").addEventListener("click", async () => {
+  if (yuklemeIstegi) {
+    yuklemeIstegi.prompt();
+    const { outcome } = await yuklemeIstegi.userChoice;
+    yuklemeIstegi = null;
+    if (outcome === "accepted") $("b-kur").classList.add("gizli");
+    return;
+  }
+  kurAdimlariGoster();
+});
+$("b-kur-kapat").addEventListener("click", kurAdimlariKapat);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$("kur-perde").classList.contains("gizli")) kurAdimlariKapat();
+});
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js").catch(() => {});
+}
+
+document.querySelectorAll(".diller button").forEach((b) => b.addEventListener("click", () => {
+  dil = b.dataset.dil;
+  try { localStorage.setItem("dil", dil); } catch (e) {}
+  uygula();
+}));
+$("b-paylas").addEventListener("click", paylas);
+
+dil = dilSec();
+uygula();
+tabloyuOku();
+setInterval(yayinGoster, 60000);
+</script>
+</body>
+</html>
