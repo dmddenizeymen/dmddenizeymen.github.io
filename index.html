@@ -226,9 +226,9 @@
   <section class="ilerleme" aria-live="polite">
     <div class="ilerleme-yazi">
       <span data-t="hedef">Hedef: 2,9 milyon $</span>
-      <span id="yuzde-yazi">%21</span>
+      <span id="yuzde-yazi">…</span>
     </div>
-    <div class="cubuk"><span id="cubuk" style="width:21%"></span></div>
+    <div class="cubuk"><span id="cubuk"></span></div>
   </section>
 
   <a class="buton b-sms" id="b-sms" href="sms:9097?&amp;body=DEN%C4%B0Z">
@@ -673,6 +673,26 @@ const METIN = {
 const $ = (id) => document.getElementById(id);
 let dil = "tr";
 let ayar = { ...AYARLAR };
+// Google'dan veri gelene kadar eski varsayılan değil, bu telefonda görülen son değerler gösterilir
+let veriHazir = false;
+const SAKLANAN_AYARLAR = ["canliYayin", "sonVideo", "yuzde", "paypal"];
+
+function sonAyarlariYukle() {
+  try {
+    const kayit = JSON.parse(localStorage.getItem("ayar"));
+    if (!kayit) return;
+    SAKLANAN_AYARLAR.forEach((k) => { if (kayit[k]) ayar[k] = kayit[k]; });
+    veriHazir = true;
+  } catch (e) {}
+}
+
+function sonAyarlariKaydet() {
+  try {
+    const kayit = {};
+    SAKLANAN_AYARLAR.forEach((k) => { kayit[k] = ayar[k]; });
+    localStorage.setItem("ayar", JSON.stringify(kayit));
+  } catch (e) {}
+}
 
 function kayitliDil() {
   try { return localStorage.getItem("dil"); } catch (e) { return null; }
@@ -706,6 +726,11 @@ function yayinGoster() {
   const saat = $("yayin-saat");
   const takvim = $("b-takvim");
 
+  if (!veriHazir) {
+    saat.textContent = "…";
+    takvim.classList.add("gizli");
+    return;
+  }
   if (bas && simdi >= bas && simdi - bas < YAYIN_SURESI_DK * 60000) {
     saat.innerHTML = `<span class="canli-simdi">${t.simdi}</span>`;
     takvim.classList.add("gizli");
@@ -754,8 +779,8 @@ function uygula() {
   $("sms-not").classList.toggle("gizli", !t.sms_not);
 
   const yuzde = Math.max(0, Math.min(100, Number(ayar.yuzde) || 0));
-  $("yuzde-yazi").textContent = dil === "tr" ? `%${yuzde}` : `${yuzde}%`;
-  $("cubuk").style.width = yuzde + "%";
+  $("yuzde-yazi").textContent = !veriHazir ? "…" : dil === "tr" ? `%${yuzde}` : `${yuzde}%`;
+  $("cubuk").style.width = veriHazir ? yuzde + "%" : "0";
 
   $("b-canli").href = PROFIL;
   $("b-video").href = ayar.sonVideo || PROFIL;
@@ -798,31 +823,42 @@ function formSutunu(baslik) {
   return null;
 }
 
+// Google yanıt vermezse sayfa beklemede kalmasın diye 8 saniyede vazgeçilir
 async function csvOku(adres) {
-  const yanit = await fetch(adres, { cache: "no-store" });
-  if (!yanit.ok) return [];
-  return (await yanit.text()).split(/\r?\n/).filter(Boolean).map(csvHucreler);
+  const iptal = new AbortController();
+  const zaman = setTimeout(() => iptal.abort(), 8000);
+  try {
+    const yanit = await fetch(adres, { cache: "no-store", signal: iptal.signal });
+    if (!yanit.ok) return [];
+    return (await yanit.text()).split(/\r?\n/).filter(Boolean).map(csvHucreler);
+  } catch (e) {
+    return [];
+  } finally {
+    clearTimeout(zaman);
+  }
 }
 
 // Önce E-Tablo (A sütunu anahtar, B sütunu değer), sonra Google Form yanıtları okunur.
 // Formda her soru için en son doldurulmuş yanıt geçerlidir; boş bırakılan sorular eski değeri korur.
 async function tabloyuOku() {
   try {
-    if (ayar.tabloCsv) {
-      for (const [anahtar, deger] of await csvOku(ayar.tabloCsv)) degerAyarla((anahtar || "").toLowerCase(), deger);
-    }
+    const [tablo, form] = await Promise.all([
+      ayar.tabloCsv ? csvOku(ayar.tabloCsv) : [],
+      ayar.formCsv ? csvOku(ayar.formCsv) : [],
+    ]);
+    for (const [anahtar, deger] of tablo) degerAyarla((anahtar || "").toLowerCase(), deger);
     const tabloYayini = ayar.canliYayin;
-    if (ayar.formCsv) {
-      const [baslik, ...yanitlar] = await csvOku(ayar.formCsv);
-      const sutunlar = (baslik || []).map(formSutunu);
-      for (const yanit of yanitlar) sutunlar.forEach((k, i) => k && degerAyarla(k, yanit[i]));
-    }
+    const [baslik, ...yanitlar] = form;
+    const sutunlar = (baslik || []).map(formSutunu);
+    for (const yanit of yanitlar) sutunlar.forEach((k, i) => k && degerAyarla(k, yanit[i]));
     // Formdaki yayın bittiyse ve E-Tablo'da ileri tarihli bir yayın varsa o gösterilir
     const simdi = new Date();
     const formYayini = yayinTarihi(ayar.canliYayin);
     const yayinBitti = !formYayini || simdi - formYayini >= YAYIN_SURESI_DK * 60000;
     if (yayinBitti && yayinTarihi(tabloYayini) > simdi) ayar.canliYayin = tabloYayini;
+    if (tablo.length || form.length) sonAyarlariKaydet();
   } catch (e) { /* okunamazsa son bilinen değerler kalır */ }
+  veriHazir = true;
   uygula();
 }
 
@@ -959,6 +995,7 @@ document.querySelectorAll(".diller button").forEach((b) => b.addEventListener("c
 $("b-paylas").addEventListener("click", paylas);
 
 dil = dilSec();
+sonAyarlariYukle();
 uygula();
 tabloyuOku();
 setInterval(yayinGoster, 60000);
