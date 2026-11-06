@@ -811,11 +811,17 @@ async function tabloyuOku() {
     if (ayar.tabloCsv) {
       for (const [anahtar, deger] of await csvOku(ayar.tabloCsv)) degerAyarla((anahtar || "").toLowerCase(), deger);
     }
+    const tabloYayini = ayar.canliYayin;
     if (ayar.formCsv) {
       const [baslik, ...yanitlar] = await csvOku(ayar.formCsv);
       const sutunlar = (baslik || []).map(formSutunu);
       for (const yanit of yanitlar) sutunlar.forEach((k, i) => k && degerAyarla(k, yanit[i]));
     }
+    // Formdaki yayın bittiyse ve E-Tablo'da ileri tarihli bir yayın varsa o gösterilir
+    const simdi = new Date();
+    const formYayini = yayinTarihi(ayar.canliYayin);
+    const yayinBitti = !formYayini || simdi - formYayini >= YAYIN_SURESI_DK * 60000;
+    if (yayinBitti && yayinTarihi(tabloYayini) > simdi) ayar.canliYayin = tabloYayini;
   } catch (e) { /* okunamazsa son bilinen değerler kalır */ }
   uygula();
 }
